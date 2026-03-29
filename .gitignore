@@ -1,0 +1,14 @@
+# Obsidian
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/plugins/
+.obsidian/core-plugins-migration.json
+
+# macOS
+.DS_Store
+
+# Temporary files
+*.tmp
+
+# Farmer state (not synced — cloud runs use fallback window)
+context/farmers/.state/

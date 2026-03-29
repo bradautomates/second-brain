@@ -1,0 +1,74 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git add:*)",
+      "Bash(grep:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(git pull:*)",
+      "mcp__claude_ai_Slack__slack_read_channel",
+      "mcp__claude_ai_Slack__slack_read_thread",
+      "mcp__claude_ai_Slack__slack_search_channels",
+      "mcp__claude_ai_Slack__slack_search_public_and_private",
+      "mcp__claude_ai_Slack__slack_read_user_profile",
+      "mcp__claude_ai_Fireflies__fireflies_get_transcripts",
+      "mcp__claude_ai_Fireflies__fireflies_get_transcript",
+      "mcp__claude_ai_Fireflies__fireflies_get_summary",
+      "mcp__claude_ai_Fireflies__fireflies_search",
+      "mcp__claude_ai_Fireflies__fireflies_fetch",
+      "mcp__claude_ai_Fireflies__fireflies_list_channels",
+      "mcp__claude_ai_Fireflies__fireflies_get_user_contacts",
+      "mcp__claude_ai_Fireflies__fireflies_get_active_meetings",
+      "mcp__claude_ai_Fireflies__fireflies_get_user"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/auto-commit.sh",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/session-sync.sh",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "matcher": ".*-farmer",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/subagent-push.sh",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/stop-sound.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
